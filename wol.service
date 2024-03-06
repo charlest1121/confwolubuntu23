@@ -1,0 +1,14 @@
+#put this service in /etc/systemd/system
+[Unit]
+Description=Enable Wake-up on LAN
+Requires=network.target
+After=network.target
+
+#network device example: enp3s0 | You can find this by doing "ls /sys/class/net/"
+[Service]
+Type=oneshot
+ExecStart=/sbin/ethtool -s REPLACE_WITH_NETWORK_DEVICE wol g
+ExecStop=/sbin/ethtool -s REPLACE_WITH_NETWORK_DEVICE wol g
+
+[Install]
+WantedBy=multi-user.target
